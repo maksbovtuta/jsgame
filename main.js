@@ -2,6 +2,35 @@ const $btnKick = document.getElementById("btn-kick");
 const $btnSpecial = document.getElementById("btn-special");
 const logs = document.getElementById("logs");
 
+function createClickCounter(button, maxClicks) {
+    let clickCount = 0;
+
+    function handleClick() {
+        if (clickCount < maxClicks) {
+            clickCount++;
+            console.log(`Button "${button.id}" clicked (${clickCount}/${maxClicks} clicks)`);
+            // Ваш код для обработки клика здесь
+        } else {
+            console.log(`Button "${button.id}" reached maximum clicks (${maxClicks} clicks)`);
+            button.disabled = true;
+        }
+    }
+
+    button.addEventListener('click', handleClick);
+
+    return {
+        getClickCount: () => clickCount,
+        resetClickCount: () => {
+            clickCount = 0;
+            button.disabled = false;
+            console.log(`Button "${button.id}" click count reset`);
+        }
+    };
+}
+
+const kickCounter = createClickCounter($btnKick, 6);
+const specialCounter = createClickCounter($btnSpecial, 6);
+
 const fighter = {
     character: {
         name: 'Pikachu',
@@ -88,11 +117,13 @@ function generateLog(firstPerson, secondPerson, damage) {
 $btnKick.addEventListener('click', function () {
     console.log('Kick');
     fighter.character.changeHP(20);
+    console.log(`Remaining clicks: ${kickCounter.getClickCount()}`);
 });
 
 $btnSpecial.addEventListener('click', function () {
     console.log('Special Attack');
     fighter.character.changeHP(30);
+    console.log(`Remaining clicks: ${specialCounter.getClickCount()}`);
 });
 
 function init() {
