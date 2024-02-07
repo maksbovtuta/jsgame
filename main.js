@@ -14,6 +14,7 @@ const logs = [
   "[ПЕРСОНАЖ №1] расстроился, как вдруг, неожиданно [ПЕРСОНАЖ №2] случайно влепил стопой в живот соперника.",
   "[ПЕРСОНАЖ №1] пытался что-то сказать, но вдруг, неожиданно [ПЕРСОНАЖ №2] со скуки, разбил бровь сопернику.",
 ];
+
 let character, enemy;
 
 const init = () => {
@@ -46,7 +47,8 @@ const init = () => {
     character.updatePokemonInfo();
     enemy.updatePokemonInfo();
 
-    updateAttackButtons(character.attacks);
+    updateAttackButtons(character.attacks, 'character');
+    updateAttackButtons(enemy.attacks, 'enemy');
   };
 
   playerPokemonSelect.addEventListener("change", updatePokemons);
@@ -55,28 +57,29 @@ const init = () => {
   updatePokemons();
 };
 
-const updateAttackButtons = (attacks) => {
-  const buttonsContainer = document.getElementById("attack-buttons");
+const updateAttackButtons = (attacks, player) => {
+  const buttonsContainer = document.getElementById(`attack-buttons-${player}`);
   buttonsContainer.innerHTML = "";
 
   attacks.forEach((attack) => {
     const button = document.createElement("button");
     button.textContent = `${attack.name}`;
     button.classList.add("button");
-    button.onclick = createAttackHandler(attack);
+    button.onclick = createAttackHandler(attack, player);
     buttonsContainer.appendChild(button);
   });
 };
 
-const createAttackHandler = (attack) => {
+const createAttackHandler = (attack, player) => {
   let counter = attack.maxCount;
   return () => {
     if (counter > 0) {
       const damage = random(attack.minDamage, attack.maxDamage);
       console.log(
-        `${character.name} использует ${attack.name}, нанося урон ${damage}`
+        `${player === 'character' ? character.name : enemy.name} использует ${attack.name}, нанося урон ${damage}`
       );
-      enemy.changeHP(damage, logAction, character.name, logs);
+      const target = player === 'character' ? enemy : character;
+      target.changeHP(damage, logAction, player === 'character' ? character.name : enemy.name, logs);
       counter--;
     } else {
       console.log(`Атака ${attack.name} больше не доступна`);

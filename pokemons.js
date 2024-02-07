@@ -64,7 +64,7 @@ export const pokemons = [
         ]
     },
     {
-        img: 'http://sify4321.000webhostapp.com/bulbasaur.png',
+        img: './assets/bulba.png',
         name: 'Bulbasaur',
         type: 'fire',
         hp: 294,
@@ -96,7 +96,7 @@ export const pokemons = [
         ]
     },
     {
-        img: 'http://sify4321.000webhostapp.com/squirtle.png',
+        img: './assets/squirtle.png',
         name: 'Squirtle',
         type: 'water',
         hp: 292,
@@ -128,7 +128,7 @@ export const pokemons = [
         ]
     },
     {
-        img: 'http://sify4321.000webhostapp.com/pidgey.png',
+        img: './assets/pidg.png',
         name: 'Pidgey',
         type: 'air',
         hp: 284,
@@ -160,7 +160,7 @@ export const pokemons = [
         ]
     },
     {
-        img: 'http://sify4321.000webhostapp.com/mew.png',
+        img: './assets/mew.png',
         name: 'Mew',
         type: 'air',
         hp: 404,

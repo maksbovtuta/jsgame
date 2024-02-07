@@ -11,9 +11,11 @@ export function random(min, max) {
     const logItem = document.createElement("div");
     logItem.textContent = `${logText} ${logDamage}`;
   
-    logElement.innerHTML = '';
-  
-    logElement.appendChild(logItem);
+    if (logElement.firstChild) {
+      logElement.insertBefore(logItem, logElement.firstChild);
+    } else {
+      logElement.appendChild(logItem);
+    }
   };
   
   

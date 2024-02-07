@@ -6,6 +6,8 @@
     padding: 0;
     margin: 0;
   }
+
+
   
   body {
     color: black;
@@ -279,6 +281,8 @@
     outline: none !important;
     cursor: pointer;
     font-size: 18px;
+    width: 193.2px;
+    margin: 5px;
   
   }
   .button:after {
